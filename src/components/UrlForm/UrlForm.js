@@ -6,7 +6,8 @@ class UrlForm extends Component {
     this.props = props;
     this.state = {
       title: '',
-      urlToShorten: ''
+      urlToShorten: '',
+      error: ''
     };
   }
 
@@ -14,10 +15,20 @@ class UrlForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!this.state.title || !this.state.urlToShorten) {
+      return this.setState({ error: "Please fill out all inputs" });
+    } else {
+      const newUrl = {
+        title: this.state.title,
+        long_url: this.state.urlToShorten,
+      };
+      this.props.addUrl(newUrl);
+    }
     this.clearInputs();
-  }
+  };
 
   clearInputs = () => {
     this.setState({title: '', urlToShorten: ''});

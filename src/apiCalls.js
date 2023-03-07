@@ -15,7 +15,7 @@ export const postUrl = (newUrl) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newUrl),
-  }).then((response) => {
+  }).then(response => {
     if (response.ok) {
       return response.json();
     } else {
